@@ -57,7 +57,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Todo todo = Todo(
-                        id: 5,
+                        id: DateTime.now().millisecondsSinceEpoch,
                         title: _todoController.text,
                         isCompleted: false,
                       );

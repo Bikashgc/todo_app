@@ -25,6 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return TodoTile(
             todo: todos[index],
+            onDelete: (id) {
+              setState(() {
+                todos.removeWhere((element) => element.id == id);
+              });
+            },
           );
         },
       ),
