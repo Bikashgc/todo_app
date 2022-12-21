@@ -30,6 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 todos.removeWhere((element) => element.id == id);
               });
             },
+            onToggle: (id) {
+              setState(() {
+                Todo todo = todos.firstWhere((element) => element.id == id);
+                todo.isCompleted = !todo.isCompleted;
+              });
+            },
           );
         },
       ),

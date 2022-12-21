@@ -6,10 +6,12 @@ class TodoTile extends StatelessWidget {
     Key? key,
     required this.todo,
     required this.onDelete,
+    required this.onToggle,
   }) : super(key: key);
 
   final Todo todo;
   final Function(int id) onDelete;
+  final Function(int id) onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class TodoTile extends StatelessWidget {
       children: [
         Checkbox(
           value: todo.isCompleted,
-          onChanged: (value) {},
+          onChanged: (value) {
+            onToggle(todo.id);
+          },
         ),
         const SizedBox(width: 20),
         Expanded(child: Text(todo.title)),
