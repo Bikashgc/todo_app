@@ -20,25 +20,37 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Todo App"),
       ),
-      body: ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (context, index) {
-          return TodoTile(
-            todo: todos[index],
-            onDelete: (id) {
-              setState(() {
-                todos.removeWhere((element) => element.id == id);
-              });
-            },
-            onToggle: (id) {
-              setState(() {
-                Todo todo = todos.firstWhere((element) => element.id == id);
-                todo.isCompleted = !todo.isCompleted;
-              });
-            },
-          );
-        },
-      ),
+      body: todos.isEmpty
+          ? const Center(
+              child: Text(
+                'Make some todos..',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 180, 130, 189),
+                ),
+              ),
+            )
+          : ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                return TodoTile(
+                  todo: todos[index],
+                  onDelete: (id) {
+                    setState(() {
+                      todos.removeWhere((element) => element.id == id);
+                    });
+                  },
+                  onToggle: (id) {
+                    setState(() {
+                      Todo todo =
+                          todos.firstWhere((element) => element.id == id);
+                      todo.isCompleted = !todo.isCompleted;
+                    });
+                  },
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Todo todo = await Navigator.of(context).push(
